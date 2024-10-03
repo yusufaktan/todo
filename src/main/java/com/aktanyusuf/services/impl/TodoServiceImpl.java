@@ -80,14 +80,30 @@ public class TodoServiceImpl implements ITodoService{
 
 	@Override
 	public List<DtoTodo> completedTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<DtoTodo> completedTodos = new ArrayList<>();
+		List<Todo> allTodos = todoRepository.findAll();
+		for (Todo todo : allTodos) {
+			if (todo.getCompleted()) {
+				DtoTodo dtoTodo = new DtoTodo();
+				BeanUtils.copyProperties(todo, dtoTodo);
+				completedTodos.add(dtoTodo);
+			}
+		}
+		return completedTodos;
 	}
 
 	@Override
 	public List<DtoTodo> uncompletedTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<DtoTodo> uncompletedTodos = new ArrayList<>();
+		List<Todo> allTodos = todoRepository.findAll();
+		for (Todo todo : allTodos) {
+			if (!todo.getCompleted()) {
+				DtoTodo dtoTodo = new DtoTodo();
+				BeanUtils.copyProperties(todo, dtoTodo);
+				uncompletedTodos.add(dtoTodo);
+			}
+		}
+		return uncompletedTodos;
 	}
 
 }

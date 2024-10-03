@@ -56,15 +56,15 @@ public class TodoControllerImpl implements ITodoController{
 	}
 
 	@Override
+	@GetMapping(path = "/completed")
 	public List<DtoTodo> completedTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return todoServiceImpl.completedTodos();
 	}
 
 	@Override
+	@GetMapping(path = "/uncompleted")
 	public List<DtoTodo> uncompletedTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return todoServiceImpl.uncompletedTodos();
 	}
 
 }
