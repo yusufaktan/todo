@@ -1,6 +1,7 @@
 package com.aktanyusuf.services.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,8 +60,16 @@ public class TodoServiceImpl implements ITodoService{
 
 	@Override
 	public List<DtoTodo> deleteTodo(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		Todo findTodo = new Todo();
+		List<Todo> allTodos = todoRepository.findAll();
+		for (Todo todo : allTodos) {
+			if (todo.getId().equals(id)) {
+				BeanUtils.copyProperties(todo, findTodo);
+				todoRepository.delete(findTodo);
+				break;
+			}
+		}
+		return getAllTodos();
 	}
 
 	@Override
