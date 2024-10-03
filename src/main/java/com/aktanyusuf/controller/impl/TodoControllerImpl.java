@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +20,11 @@ import com.aktanyusuf.services.impl.TodoServiceImpl;
 
 @RestController
 @RequestMapping("/rest/api/todo")
-public class TodoControllerImpl implements ITodoController{
+public class TodoControllerImpl implements ITodoController {
 
 	@Autowired
 	private TodoServiceImpl todoServiceImpl;
-	
+
 	@Override
 	@GetMapping
 	public List<DtoTodo> getAllTodos() {
@@ -50,9 +50,10 @@ public class TodoControllerImpl implements ITodoController{
 	}
 
 	@Override
-	public List<DtoTodo> updateTodo(DtoTodoIU dtoTodoIU) {
-		// TODO Auto-generated method stub
-		return null;
+	@PutMapping(path = "/{id}")
+	public List<DtoTodo> updateTodo(@PathVariable(name = "id", required = true) UUID id,
+			@RequestBody DtoTodoIU dtoTodoIU) {
+		return todoServiceImpl.updateTodo(id, dtoTodoIU);
 	}
 
 	@Override

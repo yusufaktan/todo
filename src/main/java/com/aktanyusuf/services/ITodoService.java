@@ -9,16 +9,16 @@ import com.aktanyusuf.dto.DtoTodoIU;
 public interface ITodoService {
 
 	public List<DtoTodo> getAllTodos();
-	
+
 	public DtoTodo getTodoById(UUID id);
-	
+
 	public List<DtoTodo> createTodo(DtoTodoIU dtoTodoIU);
-	
+
 	public List<DtoTodo> deleteTodo(UUID id);
-	
-	public List<DtoTodo> updateTodo(DtoTodoIU dtoTodoIU);
-	
+
+	public List<DtoTodo> updateTodo(UUID id, DtoTodoIU dtoTodoIU);
+
 	public List<DtoTodo> completedTodos();
-	
+
 	public List<DtoTodo> uncompletedTodos();
 }

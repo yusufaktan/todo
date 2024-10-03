@@ -16,7 +16,7 @@ public interface ITodoController {
 
 	public List<DtoTodo> deleteTodo(UUID id);
 
-	public List<DtoTodo> updateTodo(DtoTodoIU dtoTodoIU);
+	public List<DtoTodo> updateTodo(UUID id, DtoTodoIU dtoTodoIU);
 
 	public List<DtoTodo> completedTodos();
 

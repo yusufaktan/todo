@@ -1,7 +1,6 @@
 package com.aktanyusuf.services.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,16 +15,16 @@ import com.aktanyusuf.repository.TodoRepository;
 import com.aktanyusuf.services.ITodoService;
 
 @Service
-public class TodoServiceImpl implements ITodoService{
+public class TodoServiceImpl implements ITodoService {
 
 	@Autowired
 	private TodoRepository todoRepository;
-	
+
 	@Override
 	public List<DtoTodo> getAllTodos() {
 		if (todoRepository.count() == 0) {
 			return null;
-		}else {
+		} else {
 			List<DtoTodo> dtoTodos = new ArrayList<>();
 			List<Todo> allTodos = todoRepository.findAll();
 			for (Todo todo : allTodos) {
@@ -73,8 +72,15 @@ public class TodoServiceImpl implements ITodoService{
 	}
 
 	@Override
-	public List<DtoTodo> updateTodo(DtoTodoIU dtoTodoIU) {
-		// TODO Auto-generated method stub
+	public List<DtoTodo> updateTodo(UUID id, DtoTodoIU dtoTodoIU) {
+		List<Todo> todos = todoRepository.findAll();
+		for (Todo todo : todos) {
+			if (id.equals(todo.getId())) {
+				BeanUtils.copyProperties(dtoTodoIU, todo);
+				todoRepository.save(todo);
+				return getAllTodos();
+			}
+		}
 		return null;
 	}
 

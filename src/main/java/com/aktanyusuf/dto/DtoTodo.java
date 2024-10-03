@@ -13,6 +13,5 @@ public class DtoTodo {
 
 	private String todo;
 	private String description;
-	private Boolean completed;
 
 }
