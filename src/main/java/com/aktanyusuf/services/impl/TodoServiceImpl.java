@@ -38,7 +38,14 @@ public class TodoServiceImpl implements ITodoService{
 
 	@Override
 	public DtoTodo getTodoById(UUID id) {
-		// TODO Auto-generated method stub
+		List<Todo> allTodos = todoRepository.findAll();
+		for (Todo todo : allTodos) {
+			if (todo.getId().equals(id)) {
+				DtoTodo dtoTodo = new DtoTodo();
+				BeanUtils.copyProperties(todo, dtoTodo);
+				return dtoTodo;
+			}
+		}
 		return null;
 	}
 
